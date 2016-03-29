@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#number span{
+			display: inline-block;
+			padding: 10px;
+			background-color: #ff0000; 
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="input"/>
+	<input type="button" value="左侧入" id="l_push" onclick="l_push();"/>
+	<input type="button" value="右侧入" id="r_push" onclick="r_push();"/>
+	<input type="button" value="左侧出" id="l_pop" onclick="l_pop();"/>
+	<input type="button" value="左侧出" id="r_pop" onclick="r_pop();"/>
+	<div id="number"></div>
+	<script type="text/javascript">
+		var arr=[];
+		var input=document.getElementById('input');
+		var number=document.getElementById('number');
+		function l_push(){
+			var str=number.innerHTML;
+			var value=input.value;
+			str='<span onclick="pop(this);">'+ value +'</span>'+str;
+			number.innerHTML=str;
+		}
+		function r_push(){
+			var str=number.innerHTML;
+			var value=input.value;
+			str+='<span onclick="pop(this);">'+ value +'</span>';
+			number.innerHTML=str;
+		}
+		function l_pop(){
+			var pop=number.firstChild.innerHTML;
+			number.removeChild(number.firstChild);
+			alert(pop);
+		}
+		function r_pop(){
+			var pop=number.lastChild.innerHTML;
+			number.removeChild(number.lastChild);
+			alert(pop);
+		}
+		function pop(that){
+			if(that.parentNode){
+				that.parentNode.removeChild(that);
+			}
+		}
+	</script>
+</body>
+</html>
