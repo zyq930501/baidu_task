@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#number span{
+			display: inline-block;
+			width: 10px;
+			background-color: #ff0000; 
+			margin-right: 3px;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="input"/>
+	<input type="button" value="左侧入" id="l_push" onclick="l_push();"/>
+	<input type="button" value="右侧入" id="r_push" onclick="r_push();"/>
+	<input type="button" value="左侧出" id="l_pop" onclick="l_pop();"/>
+	<input type="button" value="左侧出" id="r_pop" onclick="r_pop();"/>
+	<input type="button" value="sort" id="number_sort" onclick="number_sort();"/>
+	<div id="number">
+		<span onclick="pop(this);" style="height:100px">10</span>
+		<span onclick="pop(this);" style="height:110px">11</span>
+		<span onclick="pop(this);" style="height:120px">12</span>
+		<span onclick="pop(this);" style="height:190px">19</span>
+		<span onclick="pop(this);" style="height:200px">20</span>
+		<span onclick="pop(this);" style="height:210px">21</span>
+		<span onclick="pop(this);" style="height:220px">22</span>
+		<span onclick="pop(this);" style="height:230px">23</span>
+		<span onclick="pop(this);" style="height:240px">24</span>
+		<span onclick="pop(this);" style="height:250px">25</span>
+		<span onclick="pop(this);" style="height:260px">26</span>
+		<span onclick="pop(this);" style="height:270px">27</span>
+		<span onclick="pop(this);" style="height:130px">13</span>
+		<span onclick="pop(this);" style="height:140px">14</span>
+		<span onclick="pop(this);" style="height:150px">15</span>
+		<span onclick="pop(this);" style="height:160px">16</span>
+		<span onclick="pop(this);" style="height:170px">17</span>
+		<span onclick="pop(this);" style="height:180px">18</span>
+		<span onclick="pop(this);" style="height:280px">28</span>
+		<span onclick="pop(this);" style="height:290px">29</span>
+		<span onclick="pop(this);" style="height:300px">30</span>
+	</div>
+	<script type="text/javascript">
+		var input=document.getElementById('input');
+		var number=document.getElementById('number');
+		function l_push(){
+			var str=number.innerHTML;
+			var value=input.value;
+			var px=value*10+'px';
+			if(value<=100&&value>=10){
+				if(number.children.length<=60){
+					str='<span onclick="pop(this);" style="height:'+px+'">'+value+'</span>'+str;
+					number.innerHTML=str;
+				}
+				else{
+					alert('>60');
+				}
+			}
+			
+		}
+		function r_push(){
+			var str=number.innerHTML;
+			var value=input.value;
+			var px=value*10+'px';
+			if(value<=100&&value>=10){
+				if(number.childNodes.length<=60){
+					str+='<span onclick="pop(this);" style="height:'+px+'">'+value+'</span>';
+					number.innerHTML=str;
+				}
+				else{
+					alert('>60');
+				}
+			}
+		}
+		function l_pop(){
+			var pop=number.firstChild.innerHTML;
+			number.removeChild(number.firstChild);
+			alert(pop);
+		}
+		function r_pop(){
+			var pop=number.lastChild.innerHTML;
+			number.removeChild(number.lastChild);
+			alert(pop);
+		}
+		function pop(that){
+			if(that.parentNode){
+				that.parentNode.removeChild(that);
+			}
+		}
+		function number_sort(){
+			for(var i=0;i<number.children.length;i++){
+				for(var j=0;j<number.children.length;j++){
+					var data=number.children;
+					var text;
+					if(data[j].innerHTML>data[i].innerHTML){
+						text=data[i].innerHTML;
+						data[i].innerHTML=data[j].innerHTML;
+						data[i].style.height=data[j].innerHTML * 10 +'px';
+						data[j].innerHTML=text;
+						data[j].style.height=text * 10 +'px';
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

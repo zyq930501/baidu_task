@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<textarea id="textarea"></textarea>
+	<input type="button" value="左侧入" id="l_push" onclick="l_push();"/>
+	<input type="text" id="text"/>
+	<input type="button" value="search" id="search" onclick="to_search();"/>
+	<div id="number"></div>
+	<script type="text/javascript">
+		var textarea=document.getElementById('textarea');
+		var text=document.getElementById('text');
+		var search=document.getElementById('search');
+		var number=document.getElementById('number');
+		function l_push(){
+			var innerHTML=textarea.value;
+			var str='';
+			number.innerHTML=innerHTML;
+		}
+		function to_search(){
+			var innerHTML=number.innerHTML;
+			var key=text.value;
+			var reg = new RegExp(key,'g');
+			var to_key='<span style="background-color:#aaa;">'+key+'</span>'
+			if(innerHTML.indexOf(key)>=0){
+			number.innerHTML=innerHTML.replace(reg,to_key);
+			}
+			else{
+				alert('no word');
+			}
+		}
+	</script>
+</body>
+</html>
